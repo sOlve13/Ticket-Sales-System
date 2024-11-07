@@ -1,9 +1,11 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.*;
+
 
 public class Main {  
     static boolean swtich = true;
@@ -28,33 +30,44 @@ public class Main {
         MainSystem.setBounds(0, 0, 800, 800); 
         MainSystem.setBackground(new Color(0, 36, 107));
 
+        Dimension APpos = AuthorizationPanel.getSize();
+        Dimension MSpos = MainSystem.getSize();
+        int MSCenterX = (MSpos.width - 200)/2;
+        int MSCenterY = (MSpos.height - 200)/2;
+        int APCenterX = (APpos.width - 200)/2;
+        int APCenterY = (APpos.height - 50)/2;
 
         JButton ButtonMain = new JButton("Go Back");
-        ButtonMain.setBounds(50,50,200,200);
+        ButtonMain.setBounds(MSCenterX,MSCenterY,200,100);
         ButtonMain.setBackground(new Color(202, 220, 252));
         ButtonMain.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event){
                 if(swtich == false){
                     AuthorizationPanel.setVisible(true);
                     MainSystem.setVisible(false);
+                    
                 }else{
                     AuthorizationPanel.setVisible(false);
                     MainSystem.setVisible(true);
                 }
                 swtich = !swtich;
                 System.out.println(swtich);
+                AuthorizationPanel.revalidate();
+                MainSystem.revalidate();
+                MainSystem.repaint();
+                AuthorizationPanel.repaint();
             }
         });
 
 
         JButton Button1 = new JButton();
         Button1.setVisible(true);
-        Button1.setBounds(50,300, 200,70);
+        Button1.setBounds(APCenterX,APCenterY, 200,70);
         Button1.setBackground(new Color(202, 220, 252));
 
 
         JTextField loginField = new JTextField("Write your login");
-        loginField.setBounds(50,100, 200,30); 
+        loginField.setBounds(APCenterX,APCenterY - 200, 200,30); 
         loginField.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent event) {
                 if (loginField.getText().equals("Write your login")) {
@@ -71,7 +84,7 @@ public class Main {
 
 
         JTextField passwordField = new JTextField("Write your password");
-        passwordField.setBounds(50,200, 200,30); 
+        passwordField.setBounds(APCenterX,APCenterY-100, 200,30); 
 
         passwordField.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent event){
@@ -95,26 +108,23 @@ public class Main {
                     if(swtich == true){
                         AuthorizationPanel.setVisible(false);
                         MainSystem.setVisible(true);
+                        loginField.setText("Write your login");
+                        passwordField.setText("Write your password");
                     }else{
                         AuthorizationPanel.setVisible(true);
                         MainSystem.setVisible(false);
                     }
-                    /*mainframe.setVisible(false);
-                    mainframe.dispose();
-                    JFrame newWindow = new JFrame();
-                    newWindow.setSize(800, 800);
-                    newWindow.setLayout(null); 
-                    newWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    JLabel messageLabel = new JLabel("Hello World", SwingConstants.CENTER);
-                    messageLabel.setBounds(50, 50, 200, 50);
-                    newWindow.add(messageLabel);
-                    newWindow.setVisible(true);*/
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(mainframe, "Invalid login or password.");
                 }
                 swtich = !swtich;
                 System.out.println(swtich);
+                AuthorizationPanel.revalidate();
+                MainSystem.revalidate();
+                MainSystem.repaint();
+                AuthorizationPanel.repaint();
+                
             }
         });
 
@@ -133,6 +143,9 @@ public class Main {
         mainframe.add(AuthorizationPanel);
         mainframe.add(MainSystem);
         mainframe.setVisible(true);
+
+
+        
     }  
 }
 
