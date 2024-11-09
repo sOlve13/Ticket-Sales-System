@@ -1,0 +1,6 @@
+1. Login 
+2. MainFrame with all functions 
+3. Add new ticket for admin
+4. view all tickets
+5. Buy a tickets
+6. send info about bought ticket to admin system(create a file with bought tickets) 
