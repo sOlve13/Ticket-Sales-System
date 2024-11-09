@@ -55,16 +55,15 @@ public class Main {
         MainSystem.repaint();
         AuthorizationPanel.repaint();
         viewTickets.repaint();
-
     }
     public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPanel MainSystem, JPanel AuthorizationPanel, int CenterX){
-
+        viewTickets.removeAll();
+        
         viewTickets.setVisible(true);
         MainSystem.setVisible(false);
         AuthorizationPanel.setVisible(false);
 
         JTextArea ticketsArea = new JTextArea(readFile("C:/Users/Rinat/Documents/University/YEAR 2/OOP 2 Project/Game/Game/tickets/tickets.txt"));
-
         ticketsArea.setEditable(adminrules);
         ticketsArea.setForeground(Color.WHITE);
         ticketsArea.setBackground(BgColor);
@@ -78,7 +77,7 @@ public class Main {
         
         goBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                goBackB(MainSystem, AuthorizationPanel, viewTickets, true, false, false);
+                goBackB(AuthorizationPanel, MainSystem, viewTickets, false, true, false);
             }
         });
         if(adminrules == true){
@@ -138,7 +137,7 @@ public class Main {
         viewTickets.setBackground(BgColor);
         
         JScrollPane scrollView = new JScrollPane();
-        scrollView.setBounds(0,150,800,775);
+        scrollView.setBounds(0,150,750,500);
         scrollView.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollView.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -156,10 +155,10 @@ public class Main {
         });
 
 
-        JButton Button1 = new JButton();
-        Button1.setVisible(true);
-        Button1.setBounds(CenterX,400, 200,70);
-        Button1.setBackground(new Color(202, 220, 252));
+        JButton startButton = new JButton("Log In");
+        startButton.setVisible(true);
+        startButton.setBounds(CenterX,400, 200,70);
+        startButton.setBackground(new Color(202, 220, 252));
 
 
         JTextField loginField = new JTextField("Write your login");
@@ -195,7 +194,7 @@ public class Main {
             }
         });
 
-        Button1.addActionListener(new ActionListener() {
+        startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 String login = loginField.getText();
                 String password = passwordField.getText();
@@ -234,10 +233,12 @@ public class Main {
 
         AuthorizationPanel.add(loginField);
         AuthorizationPanel.add(passwordField);
-        AuthorizationPanel.add(Button1);
+        AuthorizationPanel.add(startButton);
         MainSystem.add(ButtonBack);
         MainSystem.add(viewButton);
         AuthorizationPanel.setVisible(true);
+        MainSystem.setVisible(false);
+        viewTickets.setVisible(false);
         mainframe.add(AuthorizationPanel);
         mainframe.add(MainSystem);
         mainframe.add(viewTickets);
