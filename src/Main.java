@@ -1,3 +1,8 @@
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -6,12 +11,16 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.awt.Component;
 import java.nio.file.*;
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
 
 
 public class Main {  
-    static boolean swtich = true;
+    static boolean adminrules = false;
     static Color BgColor = new Color(0, 36, 107);
     public static String readFile(String filePath){
         String data1 = "";
@@ -25,9 +34,9 @@ public class Main {
         return data1;
 
     }
-    public static void appendFile(String filePath, String text){
+    public static void writeFile(String filePath, String text){
         try {
-            FileWriter textapp = new FileWriter(filePath, true);
+            FileWriter textapp = new FileWriter(filePath);
             textapp.write(text);
             textapp.close();
         } catch (Exception e) {
@@ -36,6 +45,9 @@ public class Main {
     }
 
     public static void goBackB(JPanel AuthorizationPanel, JPanel MainSystem, JPanel viewTickets, boolean AP, boolean  MS, boolean VT){
+        if(AP == true){
+            adminrules = false;
+        }
         MainSystem.setVisible(MS);
         AuthorizationPanel.setVisible(AP);
         viewTickets.setVisible(VT);
@@ -46,13 +58,14 @@ public class Main {
 
     }
     public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPanel MainSystem, JPanel AuthorizationPanel, int CenterX){
+
         viewTickets.setVisible(true);
         MainSystem.setVisible(false);
         AuthorizationPanel.setVisible(false);
 
-
         JTextArea ticketsArea = new JTextArea(readFile("C:/Users/Rinat/Documents/University/YEAR 2/OOP 2 Project/Game/Game/tickets/tickets.txt"));
-        ticketsArea.setEditable(false);
+
+        ticketsArea.setEditable(adminrules);
         ticketsArea.setForeground(Color.WHITE);
         ticketsArea.setBackground(BgColor);
         ticketsArea.setLineWrap(true);
@@ -60,7 +73,7 @@ public class Main {
 
 
         JButton goBack = new JButton("Go Back");
-        goBack.setBounds(CenterX, 50, 150, 80);
+        goBack.setBounds(100, 50, 150, 80);
         goBack.setBackground(new Color(202, 220, 252));
         
         goBack.addActionListener(new ActionListener() {
@@ -68,14 +81,36 @@ public class Main {
                 goBackB(MainSystem, AuthorizationPanel, viewTickets, true, false, false);
             }
         });
+        if(adminrules == true){
+        JButton changeButton = new JButton("Save Changes");
+        changeButton.setBounds(400, 50, 150, 80);
+        changeButton.setBackground(new Color(202, 220, 252));
+        
+        changeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                String changedText = ticketsArea.getText();
+                writeFile("C:/Users/Rinat/Documents/University/YEAR 2/OOP 2 Project/Game/Game/tickets/tickets.txt", changedText);
+                JOptionPane.showMessageDialog(viewTickets, "Changes were made");
+            }
+        });
+        viewTickets.add(changeButton);
+    } else{
+            for (Component components : viewTickets.getComponents()){
+                if(components instanceof JButton && ((JButton) components).getText().equals("Save Changes")){
+                    viewTickets.remove(components);
+                    break;
+                }
 
+            }
+
+    }
         scrollView.setViewportView(ticketsArea); 
         viewTickets.add(goBack);
         viewTickets.add(scrollView);
         
 
-
     }
+    
     public static void main(String[] args) {  
         JFrame mainframe = new JFrame();
         mainframe.setSize(800,800);
@@ -166,18 +201,19 @@ public class Main {
                 String password = passwordField.getText();
                 
                 if ("a".equals(login) && "a".equals(password)) {
-                        AuthorizationPanel.setVisible(false);
-                        MainSystem.setVisible(true);
-                        loginField.setText("Write your login");
-                        passwordField.setText("Write your password");
-
-
-                } else {
-                    JOptionPane.showMessageDialog(mainframe, "Invalid login or password.");
+                        adminrules = true;
+                } 
+                    AuthorizationPanel.setVisible(false);
+                    MainSystem.setVisible(true);
                     loginField.setText("Write your login");
                     passwordField.setText("Write your password");
-                }
-                System.out.println(swtich);
+                    //JOptionPane.showMessageDialog(mainframe, "Invalid login or password.");
+                    //loginField.setText("Write your login");
+                    //passwordField.setText("Write your password");
+                
+
+
+                //System.out.println(adminrules);
                 AuthorizationPanel.revalidate();
                 MainSystem.revalidate();
                 MainSystem.repaint();
@@ -201,7 +237,7 @@ public class Main {
         AuthorizationPanel.add(Button1);
         MainSystem.add(ButtonBack);
         MainSystem.add(viewButton);
-        AuthorizationPanel.setVisible(swtich);
+        AuthorizationPanel.setVisible(true);
         mainframe.add(AuthorizationPanel);
         mainframe.add(MainSystem);
         mainframe.add(viewTickets);

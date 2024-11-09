@@ -10,7 +10,7 @@
 10. Warsaw-Krakow, 15:00-16:30, Business, B14, 10
 11. Krakow-Katowice, 17:00-17:50, Economy, E11, 9
 12. Katowice-Gdansk, 18:00-21:00, Business, B12, 7
-13. Gdansk-Warsaw, 22:00-23:50, Economy, S22, 11
+13. Kielce-Poznan, 02:30-10:50, Economy, E2, 3
 14. Warsaw-Poznan, 08:30-10:50, Economy, E12, 13
 15. Poznan-Lublin, 11:30-13:20, Economy, S12, 12
 16. Lublin-Wroclaw, 14:00-16:50, Business, B13, 8
