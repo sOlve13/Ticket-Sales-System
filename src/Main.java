@@ -1,8 +1,3 @@
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -22,6 +17,7 @@ import javax.swing.text.AbstractDocument;
 public class Main {  
     static boolean adminrules = false;
     static Color BgColor = new Color(0, 36, 107);
+
     public static String readFile(String filePath){
         String data1 = "";
         try{
@@ -34,6 +30,7 @@ public class Main {
         return data1;
 
     }
+
     public static void writeFile(String filePath, String text){
         try {
             FileWriter textapp = new FileWriter(filePath);
@@ -58,7 +55,7 @@ public class Main {
     }
     public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPanel MainSystem, JPanel AuthorizationPanel, int CenterX){
         viewTickets.removeAll();
-        
+
         viewTickets.setVisible(true);
         MainSystem.setVisible(false);
         AuthorizationPanel.setVisible(false);
@@ -119,6 +116,8 @@ public class Main {
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainframe.getContentPane().setBackground(new Color(39,39,39));
 
+        ImageIcon img = new ImageIcon("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\bin\\icon.png");
+        mainframe.setIconImage(img.getImage());
 
         JPanel AuthorizationPanel = new JPanel();
         AuthorizationPanel.setLayout(null);
@@ -137,7 +136,7 @@ public class Main {
         viewTickets.setBackground(BgColor);
         
         JScrollPane scrollView = new JScrollPane();
-        scrollView.setBounds(0,150,750,500);
+        scrollView.setBounds(0,150,785,600);
         scrollView.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollView.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 

@@ -1,1 +1,1 @@
-Game
+Ticket-selling system
