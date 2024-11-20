@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.SystemTray;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -8,6 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+
+
 import javax.swing.*;
 
 
@@ -19,12 +23,12 @@ public class Main {
     public static String readFile(String filePath){
         String data1 = "";
         try{
-        data1 = new String(Files.readAllBytes(Paths.get("C:/Users/Rinat/Documents/University/YEAR 2/OOP 2 Project/Game/Game/tickets/tickets.txt")));
+        data1 = new String(Files.readAllBytes(Paths.get(filePath)));
         }
         catch(IOException e){
             System.out.println("File was not read");
         }
-        System.out.println(data1);
+        //System.out.println(data1);
         return data1;
 
     }
@@ -60,8 +64,37 @@ public class Main {
     }   
 
 
+public static boolean isLoginUserBoughtTicket(String[] boughtTickets, String selectedTicket){
+    boolean ticketAlreadyBought = false;  
+    for(int i = 0; i < boughtTickets.length; i += 1){
+        if (boughtTickets[i].trim().equals(loginname)) {
+            ticketAlreadyBought = true;
+            break;
+        }                
+    }
+    final boolean isTicketAlreadyBought = ticketAlreadyBought;
 
+    if (isTicketAlreadyBought) {
+        for (int i = 0; i < boughtTickets.length; i++) {
+            if (selectedTicket.equals(boughtTickets[i].trim())) {
+                return true;
+            }
+        }
+    }
+    else{
+        return false;
+}
+return false;
+}
 
+public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selectedTicket){
+    for (int i = 0; i < boughtTickets.length; i++) {
+        if (selectedTicket.equals(boughtTickets[i].trim())) {
+            return true;
+        }
+    }
+    return  false;
+}
 
 public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPanel MainSystem, JPanel AuthorizationPanel, int CenterX) {
         viewTickets.removeAll();
@@ -69,6 +102,11 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
         viewTickets.setVisible(true);
         MainSystem.setVisible(false);
         AuthorizationPanel.setVisible(false);
+
+        //Button goBack1 = new Button(10, 0, 0, 50, "test", new Color(123,44,56), viewTickets);
+        //goBack1.createButton();
+        //goBack1.setAction().addActionListener(event -> goBackB(AuthorizationPanel, MainSystem, viewTickets, true, false, false));
+        //goBack1.goBack(AuthorizationPanel, MainSystem, viewTickets, false, true, false);
 
         JButton goBack = new JButton("Go Back");
         goBack.setBounds(100, 50, 150, 80);
@@ -104,13 +142,24 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
             buyTicket.setBackground(new Color(202, 220, 252));
             buyTicket.addActionListener(event -> {
                 String selectedTicket = ticketList.getSelectedValue();
+                String[] boughtTickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
+
                 if (selectedTicket == null) {
                     JOptionPane.showMessageDialog(viewTickets, "Select a ticket.");
-                } else {
-                    String record = loginname + " bought: " + selectedTicket + "\n";
+                }
+                else{
+                    if(isLoginUserBoughtTicket(boughtTickets,selectedTicket)){
+                    JOptionPane.showMessageDialog(viewTickets, "You already bought this ticket");
+                    } 
+                    else if(isAlreadyBoughtTicket(boughtTickets, selectedTicket)){
+                        JOptionPane.showMessageDialog(viewTickets, "This ticket is already bought by someone else");
+                    }
+                    else{
+                    String record = loginname + "::" + selectedTicket + "::" +"\n";
                     writeBoughtFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record);
                     JOptionPane.showMessageDialog(viewTickets, "Congrats");
-                }
+                    selectedTicket = null;
+                }}
             });
             viewTickets.add(buyTicket);
             scrollView.setViewportView(ticketList);
@@ -174,6 +223,11 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
         startButton.setBackground(new Color(202, 220, 252));
 
 
+
+//        Button bt = new Button(100, 50, 50, 50, "test", new Color(123,44,56), AuthorizationPanel);
+//        bt.createButton();
+        
+
         JTextField loginField = new JTextField("Write your login");
         loginField.setBounds(CenterX,200, 200,30); 
         loginField.addFocusListener(new FocusAdapter() {
@@ -211,7 +265,9 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
             public void actionPerformed(ActionEvent event) {
                 String login = loginField.getText();
                 String password = passwordField.getText();
-                
+                if(login.isEmpty() || "Write your login".equals(login)){
+                    JOptionPane.showMessageDialog(mainframe, "Invalid login");
+                }else{
                 if ("a".equals(login) && "a".equals(password)) {
                         adminrules = true;
                 } else{
@@ -232,6 +288,7 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
                 MainSystem.revalidate();
                 MainSystem.repaint();
                 AuthorizationPanel.repaint();
+                }
                 
             }
         });
@@ -245,6 +302,8 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
                 pressedView(viewTickets, scrollView, MainSystem, AuthorizationPanel, CenterX);
             }
         });
+
+ 
 
         AuthorizationPanel.add(loginField);
         AuthorizationPanel.add(passwordField);

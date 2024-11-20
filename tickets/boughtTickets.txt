@@ -1,3 +1,2 @@
-test bought: 23. Warsaw-Kielce, 22:30-00:10, Business, B12, 9
-agh bought: 9. Katowice-Warsaw, 12:00-14:20, Economy, S22, 14
-test1 bought: 9. Katowice-Warsaw, 12:00-14:20, Economy, S22, 14
+renat::1. Warsaw-Kielce, 18:30-20:10, Economy, S22, 14::
+renat::2. Kielce-Krakow, 20:30-21:50, Economy, S22, 14::
