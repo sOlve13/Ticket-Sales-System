@@ -1,2 +1,25 @@
 renat::1. Warsaw-Kielce, 18:30-20:10, Economy, S22, 14::
 renat::2. Kielce-Krakow, 20:30-21:50, Economy, S22, 14::
+ 
+renat::Wroclaw-Poznan, 2024-12-03(14:00) - 2024-12-16(15:50), Economy, E11, 12::
+=========================================
+From: Wroclaw
+To: Poznan
+Booking Date: 2024-12-03 14:00
+Arrival: 2024-12-16 15:50
+Seat: E11
+Type: Economy
+Total Cost: 12
+Bought By: renat
+=========================================
+renat::Poznan-Lublin, 2024-12-02(11:30) - 2024-12-07(13:20), Economy, S12, 12::
+=========================================
+From: Poznan
+To: Lublin
+Booking Date: 2024-12-02 11:30
+Arrival: 2024-12-07 13:20
+Seat: S12
+Type: Economy
+Total Cost: 12
+Bought By: renat
+=========================================

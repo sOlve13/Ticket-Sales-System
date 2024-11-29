@@ -1,50 +1,51 @@
-1. Warsaw-Kielce, 18:30-20:10, Economy, S22, 14
-2. Kielce-Krakow, 20:30-21:50, Economy, S22, 14
-3. Krakow-Gdansk, 06:00-09:30, Economy, S12, 15
-4. Gdansk-Wroclaw, 11:00-13:45, Business, B12, 8
-5. Wroclaw-Poznan, 14:00-15:50, Economy, E11, 12
-6. Poznan-Warsaw, 16:10-18:20, Economy, S22, 18
-7. Warsaw-Lodz, 07:00-08:30, Economy, S22, 14
-8. Lodz-Katowice, 09:00-10:50, Economy, E13, 13
-9. Katowice-Warsaw, 12:00-14:20, Economy, S22, 14
-10. Warsaw-Krakow, 15:00-16:30, Business, B14, 10
-11. Krakow-Katowice, 17:00-17:50, Economy, E11, 9
-12. Katowice-Gdansk, 18:00-21:00, Business, B12, 7
-13. Kielce-Poznan, 02:30-10:50, Economy, E2, 3
-14. Warsaw-Poznan, 08:30-10:50, Economy, E12, 13
-15. Poznan-Lublin, 11:30-13:20, Economy, S12, 12
-16. Lublin-Wroclaw, 14:00-16:50, Business, B13, 8
-17. Wroclaw-Warsaw, 17:10-19:30, Economy, E13, 10
-18. Warsaw-Gdynia, 06:00-08:50, Economy, S22, 14
-19. Gdynia-Lublin, 09:00-11:40, Economy, S12, 16
-20. Lublin-Krakow, 12:10-14:00, Business, B14, 7
-21. Krakow-Gdansk, 15:00-18:30, Economy, S11, 13
-22. Gdansk-Warsaw, 19:00-21:20, Economy, S22, 18
-23. Warsaw-Kielce, 22:30-00:10, Business, B12, 9
-24. Kielce-Krakow, 07:30-09:00, Economy, S22, 14
-25. Krakow-Poznan, 10:00-12:45, Economy, S13, 11
-26. Poznan-Lodz, 13:30-15:20, Business, B14, 8
-27. Lodz-Warsaw, 16:00-17:30, Economy, E12, 15
-28. Warsaw-Gdansk, 18:00-20:40, Business, B13, 7
-29. Gdansk-Wroclaw, 21:30-00:20, Economy, S14, 12
-30. Wroclaw-Lublin, 05:30-07:50, Economy, S11, 14
-31. Lublin-Katowice, 08:10-10:30, Business, B12, 6
-32. Katowice-Warsaw, 11:00-13:40, Economy, S22, 14
-33. Warsaw-Krakow, 14:00-16:00, Economy, S13, 13
-34. Krakow-Gdynia, 17:30-20:50, Business, B14, 9
-35. Gdynia-Lodz, 21:30-23:10, Economy, S11, 15
-36. Lodz-Wroclaw, 06:10-08:30, Business, B13, 8
-37. Wroclaw-Warsaw, 09:00-11:20, Economy, S22, 14
-38. Warsaw-Kielce, 12:00-13:50, Economy, E12, 11
-39. Kielce-Poznan, 14:00-16:30, Business, B14, 7
-40. Poznan-Lublin, 17:00-18:40, Economy, S13, 13
-41. Lublin-Gdansk, 19:30-22:10, Economy, S22, 16
-42. Gdansk-Warsaw, 23:00-01:30, Economy, S12, 12
-43. Warsaw-Wroclaw, 07:00-09:30, Business, B13, 10
-44. Wroclaw-Krakow, 10:00-12:20, Economy, S14, 14
-45. Krakow-Gdansk, 13:00-16:30, Economy, S22, 18
-46. Gdansk-Warsaw, 17:10-19:50, Business, B12, 9
-47. Warsaw-Poznan, 20:30-22:10, Economy, S13, 11
-48. Poznan-Kielce, 06:00-08:40, Economy, E12, 13
-49. Kielce-Lodz, 09:30-11:20, Economy, S22, 12
-50. Lodz-Warsaw, 12:00-13:40, Business, B14, 8
+Warsaw-Kielce, 2024-12-01(08:30) - 2024-12-13(18:10), Economy, S22, 14
+Kielce-Krakow, 2024-11-21(09:30) - 2024-12-05(10:50), Economy, S12, 13
+Krakow-Gdansk, 2024-12-02(06:00) - 2024-12-10(09:30), Economy, S12, 16
+Gdansk-Wroclaw, 2024-11-29(10:00) - 2024-12-14(13:45), Business, B12, 8
+Wroclaw-Poznan, 2024-12-03(14:00) - 2024-12-16(15:50), Economy, E11, 12
+Poznan-Warsaw, 2024-11-27(16:10) - 2024-12-10(18:20), Economy, S22, 18
+Warsaw-Lodz, 2024-12-04(07:00) - 2024-12-13(08:30), Economy, S22, 14
+Lodz-Katowice, 2024-11-22(09:00) - 2024-12-06(10:50), Economy, E13, 13
+Katowice-Warsaw, 2024-12-01(12:00) - 2024-12-10(14:20), Economy, S22, 14
+Warsaw-Krakow, 2024-11-30(15:00) - 2024-12-12(16:30), Business, B14, 10
+Krakow-Katowice, 2024-12-02(17:00) - 2024-12-07(17:50), Economy, E11, 9
+Katowice-Gdansk, 2024-11-23(18:00) - 2024-12-09(21:00), Business, B12, 7
+Kielce-Poznan, 2024-11-20(02:30) - 2024-12-05(10:50), Economy, E2, 3
+Warsaw-Poznan, 2024-11-28(08:30) - 2024-12-10(10:50), Economy, E12, 13
+Poznan-Lublin, 2024-12-02(11:30) - 2024-12-07(13:20), Economy, S12, 12
+Lublin-Wroclaw, 2024-11-30(14:00) - 2024-12-15(16:50), Business, B13, 8
+Wroclaw-Warsaw, 2024-12-04(17:10) - 2024-12-13(19:30), Economy, E13, 10
+Warsaw-Gdynia, 2024-12-05(06:00) - 2024-12-09(08:50), Economy, S22, 14
+Gdynia-Lublin, 2024-12-06(09:00) - 2024-12-11(11:40), Economy, S12, 16
+Lublin-Krakow, 2024-11-29(12:10) - 2024-12-06(14:00), Business, B14, 7
+Krakow-Gdansk, 2024-12-02(15:00) - 2024-12-12(18:30), Economy, S11, 13
+Gdansk-Warsaw, 2024-12-05(19:00) - 2024-12-13(21:20), Economy, S22, 18
+Warsaw-Kielce, 2024-11-21(22:30) - 2024-12-03(00:10), Business, B12, 9
+Kielce-Krakow, 2024-12-02(07:30) - 2024-12-07(09:00), Economy, S22, 14
+Krakow-Poznan, 2024-11-26(10:00) - 2024-12-05(12:45), Economy, S13, 11
+Poznan-Lodz, 2024-12-01(13:30) - 2024-12-12(15:20), Business, B14, 8
+Lodz-Warsaw, 2024-11-28(16:00) - 2024-12-09(17:30), Economy, E12, 15
+Warsaw-Gdansk, 2024-12-04(18:00) - 2024-12-12(20:40), Business, B13, 7
+Gdansk-Wroclaw, 2024-11-30(21:30) - 2024-12-09(00:20), Economy, S14, 12
+Wroclaw-Lublin, 2024-11-23(05:30) - 2024-12-06(07:50), Economy, S11, 14
+Lublin-Katowice, 2024-11-28(08:10) - 2024-12-10(10:30), Business, B12, 6
+Katowice-Warsaw, 2024-12-02(11:00) - 2024-12-11(13:40), Economy, S22, 14
+Warsaw-Krakow, 2024-11-30(14:00) - 2024-12-07(16:00), Economy, S13, 13
+Krakow-Gdynia, 2024-12-01(17:30) - 2024-12-12(20:50), Business, B14, 9
+Gdynia-Lodz, 2024-12-03(21:30) - 2024-12-13(23:10), Economy, S11, 15
+Lodz-Wroclaw, 2024-11-29(06:10) - 2024-12-05(08:30), Business, B13, 8
+Wroclaw-Warsaw, 2024-12-04(09:00) - 2024-12-09(11:20), Economy, S22, 14
+Warsaw-Kielce, 2024-11-28(12:00) - 2024-12-06(13:50), Economy, E12, 11
+Kielce-Poznan, 2024-11-30(14:00) - 2024-12-12(16:30), Business, B14, 7
+Poznan-Lublin, 2024-12-02(17:00) - 2024-12-10(18:40), Economy, S13, 13
+Lublin-Gdansk, 2024-12-03(19:30) - 2024-12-15(22:10), Economy, S22, 16
+Gdansk-Warsaw, 2024-11-30(23:00) - 2024-12-10(01:30), Economy, S12, 12
+Warsaw-Wroclaw, 2024-12-02(07:00) - 2024-12-13(09:30), Business, B13, 10
+Wroclaw-Krakow, 2024-11-28(10:00) - 2024-12-12(12:20), Economy, S14, 14
+Krakow-Gdansk, 2024-12-01(13:00) - 2024-12-11(16:30), Economy, S22, 18
+Gdansk-Warsaw, 2024-11-23(17:10) - 2024-12-12(19:50), Business, B12, 9
+Warsaw-Poznan, 2024-11-26(20:30) - 2024-12-09(22:10), Economy, S13, 11
+Poznan-Kielce, 2024-12-05(06:00) - 2024-12-13(08:40), Economy, E12, 13
+Kielce-Lodz, 2024-11-28(09:30) - 2024-12-10(11:20), Economy, S22, 12
+Lodz-Warsaw, 2024-12-02(12:00) - 2024-12-12(13:40), Business, B14, 8
+Poznan-Krakow, 2023-12-03(00:45) - 2023-12-06(22:15), Business, A4, 324

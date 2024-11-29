@@ -1,17 +1,9 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.SystemTray;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.HashMap;
-
-
 import javax.swing.*;
 
 
@@ -20,29 +12,7 @@ public class Main {
     static Color BgColor = new Color(0, 36, 107);
     static String loginname = "";
 
-    public static String readFile(String filePath){
-        String data1 = "";
-        try{
-        data1 = new String(Files.readAllBytes(Paths.get(filePath)));
-        }
-        catch(IOException e){
-            System.out.println("File was not read");
-        }
-        //System.out.println(data1);
-        return data1;
-
-    }
-
-    public static void writeFile(String filePath, String text){
-        try {
-            FileWriter textapp = new FileWriter(filePath);
-            textapp.write(text);
-            textapp.close();
-        } catch (Exception e) {
-            System.out.println("Couldn't open the file");
-        }
-    }
-
+   
     public static void goBackB(JPanel AuthorizationPanel, JPanel MainSystem, JPanel viewTickets, boolean AP, boolean  MS, boolean VT){
         if(AP == true){
             adminrules = false;
@@ -55,13 +25,7 @@ public class Main {
         AuthorizationPanel.repaint();
         viewTickets.repaint();
     }
-    public static void writeBoughtFile(String filePath, String text) {
-        try (FileWriter writer = new FileWriter(filePath, true)) {
-            writer.write(text);
-        } catch (IOException e) {
-            System.out.println("Couldn't write to the file");
-        }
-    }   
+
 
 
 public static boolean isLoginUserBoughtTicket(String[] boughtTickets, String selectedTicket){
@@ -96,79 +60,7 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
     return  false;
 }
 
-public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPanel MainSystem, JPanel AuthorizationPanel, int CenterX) {
-        viewTickets.removeAll();
 
-        viewTickets.setVisible(true);
-        MainSystem.setVisible(false);
-        AuthorizationPanel.setVisible(false);
-
-        //Button goBack1 = new Button(10, 0, 0, 50, "test", new Color(123,44,56), viewTickets);
-        //goBack1.createButton();
-        //goBack1.setAction().addActionListener(event -> goBackB(AuthorizationPanel, MainSystem, viewTickets, true, false, false));
-        //goBack1.goBack(AuthorizationPanel, MainSystem, viewTickets, false, true, false);
-
-        JButton goBack = new JButton("Go Back");
-        goBack.setBounds(100, 50, 150, 80);
-        goBack.setBackground(new Color(202, 220, 252));
-        goBack.addActionListener(event -> goBackB(AuthorizationPanel, MainSystem, viewTickets, false, true, false));
-
-        if (adminrules) {
-            JTextArea ticketsArea = new JTextArea(readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt"));
-            ticketsArea.setEditable(true);
-            ticketsArea.setForeground(Color.WHITE);
-            ticketsArea.setBackground(BgColor);
-            ticketsArea.setLineWrap(true);
-            ticketsArea.setWrapStyleWord(true);
-
-            JButton changeButton = new JButton("Save Changes");
-            changeButton.setBounds(400, 50, 150, 80);
-            changeButton.setBackground(new Color(202, 220, 252));
-            changeButton.addActionListener(event -> {
-                writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", ticketsArea.getText());
-                JOptionPane.showMessageDialog(viewTickets, "Changes saved.");
-            });
-            viewTickets.add(changeButton);
-            scrollView.setViewportView(ticketsArea);
-        } else {
-            String[] tickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt").split("\n");
-            JList<String> ticketList = new JList<>(tickets);
-            ticketList.setBackground(BgColor);
-            ticketList.setForeground(Color.WHITE);
-            ticketList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-            JButton buyTicket = new JButton("Buy Ticket");
-            buyTicket.setBounds(400, 50, 150, 80);
-            buyTicket.setBackground(new Color(202, 220, 252));
-            buyTicket.addActionListener(event -> {
-                String selectedTicket = ticketList.getSelectedValue();
-                String[] boughtTickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
-
-                if (selectedTicket == null) {
-                    JOptionPane.showMessageDialog(viewTickets, "Select a ticket.");
-                }
-                else{
-                    if(isLoginUserBoughtTicket(boughtTickets,selectedTicket)){
-                    JOptionPane.showMessageDialog(viewTickets, "You already bought this ticket");
-                    } 
-                    else if(isAlreadyBoughtTicket(boughtTickets, selectedTicket)){
-                        JOptionPane.showMessageDialog(viewTickets, "This ticket is already bought by someone else");
-                    }
-                    else{
-                    String record = loginname + "::" + selectedTicket + "::" +"\n";
-                    writeBoughtFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record);
-                    JOptionPane.showMessageDialog(viewTickets, "Congrats");
-                    selectedTicket = null;
-                }}
-            });
-            viewTickets.add(buyTicket);
-            scrollView.setViewportView(ticketList);
-        }
-        viewTickets.add(goBack);
-        viewTickets.add(scrollView);
-        viewTickets.revalidate();
-        viewTickets.repaint();
-    }
     
     public static void main(String[] args) {  
         JFrame mainframe = new JFrame();
@@ -260,6 +152,15 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
                 }
             }
         });
+        JButton AddButton = new JButton("Add");
+        AddButton.setBounds(CenterX, 600, 150, 80);
+        AddButton.setBackground(new Color(202, 220, 252));
+        AddButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event){
+                AddTicket.addTicket(viewTickets, scrollView, MainSystem, AuthorizationPanel, BgColor);
+            }
+        }); 
+
 
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -270,6 +171,7 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
                 }else{
                 if ("a".equals(login) && "a".equals(password)) {
                         adminrules = true;
+                        MainSystem.add(AddButton);
                 } else{
                         loginname = login;
                 }
@@ -277,13 +179,7 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
                     MainSystem.setVisible(true);
                     loginField.setText("Write your login");
                     passwordField.setText("Write your password");
-                    //JOptionPane.showMessageDialog(mainframe, "Invalid login or password.");
-                    //loginField.setText("Write your login");
-                    //passwordField.setText("Write your password");
                 
-
-
-                //System.out.println(adminrules);
                 AuthorizationPanel.revalidate();
                 MainSystem.revalidate();
                 MainSystem.repaint();
@@ -299,12 +195,11 @@ public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPane
         viewButton.setBackground(new Color(202, 220, 252));
         viewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                pressedView(viewTickets, scrollView, MainSystem, AuthorizationPanel, CenterX);
+                ViewTicket.pressedView(viewTickets, scrollView, MainSystem, AuthorizationPanel, CenterX, BgColor);
             }
-        });
+        }); 
 
- 
-
+        
         AuthorizationPanel.add(loginField);
         AuthorizationPanel.add(passwordField);
         AuthorizationPanel.add(startButton);
