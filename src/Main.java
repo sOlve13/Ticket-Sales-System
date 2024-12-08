@@ -17,6 +17,13 @@ public class Main {
         if(AP == true){
             adminrules = false;
         }
+        MainSystem.repaint();
+        AuthorizationPanel.repaint();
+        viewTickets.repaint();
+        MainSystem.revalidate();
+        AuthorizationPanel.revalidate();
+        viewTickets.revalidate();
+
         MainSystem.setVisible(MS);
         AuthorizationPanel.setVisible(AP);
         viewTickets.setVisible(VT);
@@ -60,6 +67,7 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
     return  false;
 }
 
+ 
 
     
     public static void main(String[] args) {  
@@ -78,6 +86,12 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         AuthorizationPanel.setLayout(null);
         AuthorizationPanel.setBounds(0, 0, 800, 800); 
         AuthorizationPanel.setBackground(BgColor);
+        
+        JPanel userTicketInfo = new JPanel();
+        userTicketInfo.setLayout(null);
+        userTicketInfo.setBounds(0, 0, 800, 800); 
+        userTicketInfo.setBackground(BgColor);
+
 
 
         JPanel MainSystem = new JPanel();
@@ -89,6 +103,11 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         viewTickets.setLayout(null);
         viewTickets.setBounds(0, 0, 800, 800);
         viewTickets.setBackground(BgColor);
+
+        JPanel AddTicketPanel = new JPanel();
+        AddTicketPanel.setLayout(null);
+        AddTicketPanel.setBounds(0, 0, 800, 800);
+        AddTicketPanel.setBackground(BgColor);
         
         JScrollPane scrollView = new JScrollPane();
         scrollView.setBounds(0,150,785,600);
@@ -114,7 +133,10 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         startButton.setBounds(CenterX,400, 200,70);
         startButton.setBackground(new Color(202, 220, 252));
 
-
+        JScrollPane scrollView2 = new JScrollPane();
+        scrollView2.setBounds(0, 150, 785, 600);
+        scrollView2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollView2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 //        Button bt = new Button(100, 50, 50, 50, "test", new Color(123,44,56), AuthorizationPanel);
 //        bt.createButton();
@@ -157,7 +179,7 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         AddButton.setBackground(new Color(202, 220, 252));
         AddButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                AddTicket.addTicket(viewTickets, scrollView, MainSystem, AuthorizationPanel, BgColor);
+                AddTicket.addTicket(AddTicketPanel,viewTickets, scrollView, MainSystem, AuthorizationPanel,CenterX, BgColor);
             }
         }); 
 
@@ -199,18 +221,22 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
             }
         }); 
 
-        
+        mainframe.add(userTicketInfo);
+        mainframe.add(AddTicketPanel);
         AuthorizationPanel.add(loginField);
         AuthorizationPanel.add(passwordField);
         AuthorizationPanel.add(startButton);
         MainSystem.add(ButtonBack);
         MainSystem.add(viewButton);
+        AddTicketPanel.setVisible(false);
         AuthorizationPanel.setVisible(true);
         MainSystem.setVisible(false);
         viewTickets.setVisible(false);
+        userTicketInfo.setVisible(false);
         mainframe.add(AuthorizationPanel);
         mainframe.add(MainSystem);
         mainframe.add(viewTickets);
+        mainframe.add(scrollView);
         mainframe.setVisible(true);
         
 

@@ -1,25 +1,28 @@
 import java.awt.Color;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.*;
 
 public class ViewTicket {
-    static boolean adminrules = Main.adminrules;
 
     public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPanel MainSystem, JPanel AuthorizationPanel, int CenterX, Color BgColor) {
         viewTickets.removeAll();
+        scrollView.repaint();
+        scrollView.revalidate();
 
         viewTickets.setVisible(true);
         MainSystem.setVisible(false);
         AuthorizationPanel.setVisible(false);
 
-
+        boolean adminrules = Main.adminrules;
 
         JButton goBack = new JButton("Go Back");
         goBack.setBounds(100, 50, 150, 80);
         goBack.setBackground(new Color(202, 220, 252));
         goBack.addActionListener(event -> Main.goBackB(AuthorizationPanel, MainSystem, viewTickets, false, true, false));
 
+        updateFreeTickets();
         if (adminrules) {
             JTextArea ticketsArea = new JTextArea(ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt"));
             ticketsArea.setEditable(true);
@@ -38,8 +41,13 @@ public class ViewTicket {
             viewTickets.add(changeButton);
             scrollView.setViewportView(ticketsArea);
         } else {
-            String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt").split("\n");
-            JList<String> ticketList = new JList<>(tickets);
+            String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
+            DefaultListModel<String> model = new DefaultListModel<>();
+            for (String ticket : tickets) {
+                model.addElement(ticket);
+            }
+
+            JList<String> ticketList = new JList<>(model);
             ticketList.setBackground(BgColor);
             ticketList.setForeground(Color.WHITE);
             ticketList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -49,11 +57,11 @@ public class ViewTicket {
             buyTicket.setBackground(new Color(202, 220, 252));
             buyTicket.addActionListener(event -> {
                 String selectedTicket = ticketList.getSelectedValue();
-                String[] boughtTickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
-
                 if (selectedTicket == null) {
                     JOptionPane.showMessageDialog(viewTickets, "Select a ticket.");
                 } else {
+                    String[] boughtTickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
+
                     if (Main.isLoginUserBoughtTicket(boughtTickets, selectedTicket)) {
                         JOptionPane.showMessageDialog(viewTickets, "You already bought this ticket");
                     } else if (Main.isAlreadyBoughtTicket(boughtTickets, selectedTicket)) {
@@ -61,47 +69,16 @@ public class ViewTicket {
                     } else {
                         selectedTicket = selectedTicket.replace("\n", "").replace("\r", "");
                         String record = Main.loginname + "::" + selectedTicket + "::" + "\n";
-                        
-                        String regex = "([A-Za-z]+)-([A-Za-z]+), (\\d{4}-\\d{2}-\\d{2}\\(\\d{2}:\\d{2}\\)) - (\\d{4}-\\d{2}-\\d{2}\\(\\d{2}:\\d{2}\\)), (\\w+), ([A-Z]\\d+), (\\d+)";
-                        Pattern pattern = Pattern.compile(regex);
-                        Matcher matcher = pattern.matcher(selectedTicket);
-                        
-                        if (matcher.find()) {
-                            // Extract values using matcher groups
-                            String fromCity = matcher.group(1);
-                            String toCity = matcher.group(2);
-                            String departureDate = matcher.group(3).replace("(", " ").replace(")", "");
-                            String arrivalDate = matcher.group(4).replace("(", " ").replace(")", "");
-                            String classType = matcher.group(5);
-                            String seat = matcher.group(6);
-                            String price = matcher.group(7);
-                        
+                        WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
+                        updateFreeTickets();
+                        model.removeElement(selectedTicket);
 
-                            
-                
-
-
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "=========================================\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "From: " + fromCity + "\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "To: " + toCity + "\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "Booking Date: " + departureDate + "\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "Arrival: " + arrivalDate + "\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "Seat: " + seat + "\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "Type: " + classType + "\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "Total price: " + price + "\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "Bought By: " + Main.loginname + "\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "\n", true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
-                            WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", "=========================================\n", true);
-                            JOptionPane.showMessageDialog(viewTickets, "Congrats");
-                            selectedTicket = null;
-                        } else {
-                            JOptionPane.showMessageDialog(viewTickets, "Invalid ticket format");
-                        }
-                        
-                }}
+                        JOptionPane.showMessageDialog(viewTickets, "Congrats, ticket bought!");
+                    }
+                }
                 viewTickets.repaint();
             });
+
             viewTickets.add(buyTicket);
             scrollView.setViewportView(ticketList);
         }
@@ -109,5 +86,27 @@ public class ViewTicket {
         viewTickets.add(scrollView);
         viewTickets.revalidate();
         viewTickets.repaint();
+    }
+
+    private static void updateFreeTickets() {
+        List<String> allTickets = new ArrayList<>(Arrays.asList(ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt").split("\n")));
+        List<String> boughtTickets = new ArrayList<>(Arrays.asList(ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::")));
+
+        List<String> boughtTicketRoutes = new ArrayList<>();
+        for (String ticket : boughtTickets) {
+            String cleanedTicket = ticket.replaceAll("^[^:]+::", "").replaceAll("::$", "");
+
+            String[] ticketDetails = cleanedTicket.split(",");
+            if (ticketDetails.length > 1) {
+                String routeInfo = ticketDetails[0] + "," + ticketDetails[1];
+                boughtTicketRoutes.add(routeInfo);
+            }
+        }
+        // Remove the bought tickets from the allTickets list based on the route information
+        for (String boughtRoute : boughtTicketRoutes) {
+            allTickets.removeIf(ticket -> ticket.contains(boughtRoute));  
+        }
+        String updatedFreeTickets = String.join("\n", allTickets);
+        WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt", updatedFreeTickets, false);
     }
 }
