@@ -94,12 +94,12 @@ public class ViewTicket {
 
         List<String> boughtTicketRoutes = new ArrayList<>();
         for (String ticket : boughtTickets) {
-            String cleanedTicket = ticket.replaceAll("^[^:]+::", "").replaceAll("::$", "");
+            String cleanTicket = ticket.replaceAll("^[^:]+::", "").replaceAll("::$", "");
 
-            String[] ticketDetails = cleanedTicket.split(",");
+            String[] ticketDetails = cleanTicket.split(",");
             if (ticketDetails.length > 1) {
-                String routeInfo = ticketDetails[0] + "," + ticketDetails[1];
-                boughtTicketRoutes.add(routeInfo);
+                String routeDetails = ticketDetails[0] + "," + ticketDetails[1];
+                boughtTicketRoutes.add(routeDetails);
             }
         }
         // Remove the bought tickets from the allTickets list based on the route information

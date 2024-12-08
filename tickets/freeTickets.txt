@@ -38,4 +38,5 @@ Wroclaw-Krakow, 2024-11-28(10:00) - 2024-12-12(12:20), Economy, S14, 14
 Krakow-Gdansk, 2024-12-01(13:00) - 2024-12-11(16:30), Economy, S22, 18
 Gdansk-Warsaw, 2024-11-23(17:10) - 2024-12-12(19:50), Business, B12, 9
 Warsaw-Poznan, 2024-11-26(20:30) - 2024-12-09(22:10), Economy, S13, 11
-Poznan-Kielce, 2024-12-05(06:00) - 2024-12-13(08:40), Economy, E12, 13
+Poznan-Kielce, 2024-12-05(06:00) - 2024-12-13(08:40), Economy, E12, 13
+Warsaw-Poznan, 2024-12-01(00:00) - 2024-12-03(10:15), Economy, S1, 20

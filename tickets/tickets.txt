@@ -50,3 +50,4 @@ Kielce-Lodz, 2024-11-28(09:30) - 2024-12-10(11:20), Economy, S22, 12
 Lodz-Warsaw, 2024-12-02(12:00) - 2024-12-12(13:40), Business, B14, 8
 Poznan-Krakow, 2023-12-03(00:45) - 2023-12-06(22:15), Business, A4, 324
 Wroclaw-Gdansk, 2023-12-13(09:30) - 2023-12-14(16:30), First Class, S5, 123
+Warsaw-Poznan, 2024-12-01(00:00) - 2024-12-03(10:15), Economy, S1, 20

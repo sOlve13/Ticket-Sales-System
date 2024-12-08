@@ -108,13 +108,22 @@ public class AddTicket {
                 try {
                     dateFormat.parse(dateStart);
                     dateFormat.parse(dateFinish);
+
+                    java.util.Date startDate = dateFormat.parse(dateStart);
+                    java.util.Date finishDate = dateFormat.parse(dateFinish);
+
+                    if (finishDate.before(startDate)) {
+                        JOptionPane.showMessageDialog(AddTicketPanel, "Arrival date cannot be earlier than the departure date.");
+                        return;
+                    }
+        
                 } catch (ParseException ex) {
                     JOptionPane.showMessageDialog(AddTicketPanel, "Invalid date format. Please use YYYY-MM-DD.");
                     return;
                 }
 
                 if (from.equals(to)) {
-                    JOptionPane.showMessageDialog(AddTicketPanel, "Departure and arrival cities cannot be the same.");
+                    JOptionPane.showMessageDialog(AddTicketPanel, "Departure and arrival places cannot be the same.");
                     return;
                 }
 
@@ -125,15 +134,11 @@ public class AddTicket {
                         throw new NumberFormatException();
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(AddTicketPanel, "Invalid price. Please enter a positive integer.");
+                    JOptionPane.showMessageDialog(AddTicketPanel, "Invalid price");
                     return;
                 }
 
-                String ticketData = "Free| " + from + "-" + to + ", " +
-                                    dateStart + "(" + timeStart + ") - " +
-                                    dateFinish + "(" + timeFinish + "), " +
-                                    priceClass + ", " + seat + ", " +
-                                    price + "\n";
+                String ticketData = from + "-" + to + ", " + dateStart + "(" + timeStart + ") - " + dateFinish + "(" + timeFinish + "), " + priceClass + ", " + seat + ", " + price + "\n";
 
                 WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", ticketData, true);
                 JOptionPane.showMessageDialog(AddTicketPanel, "Ticket saved successfully!");
