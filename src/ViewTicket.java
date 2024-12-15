@@ -62,9 +62,20 @@ public class ViewTicket {
                 } else {
                     String[] boughtTickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
 
-                    if (Main.isLoginUserBoughtTicket(boughtTickets, selectedTicket)) {
-                        JOptionPane.showMessageDialog(viewTickets, "You already bought this ticket");
-                    } else if (Main.isAlreadyBoughtTicket(boughtTickets, selectedTicket)) {
+                    System.out.println("Logged-in user: " + Main.loginname);
+                    System.out.println("Matching tickets for the user:");
+
+                    String[] myTickets = Main.isLoginUserBoughtTicket(boughtTickets, selectedTicket);
+                    for (String ticket : myTickets) {
+                        System.out.println(ticket);
+                    }
+
+
+                    
+
+                    
+                    
+                    if (Main.isAlreadyBoughtTicket(boughtTickets, selectedTicket)) {
                         JOptionPane.showMessageDialog(viewTickets, "This ticket is already bought by someone else");
                     } else {
                         selectedTicket = selectedTicket.replace("\n", "").replace("\r", "");

@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 
 
@@ -34,29 +36,27 @@ public class Main {
     }
 
 
-
-public static boolean isLoginUserBoughtTicket(String[] boughtTickets, String selectedTicket){
-    boolean ticketAlreadyBought = false;  
-    for(int i = 0; i < boughtTickets.length; i += 1){
-        if (boughtTickets[i].trim().equals(loginname)) {
-            ticketAlreadyBought = true;
-            break;
-        }                
-    }
-    final boolean isTicketAlreadyBought = ticketAlreadyBought;
-
-    if (isTicketAlreadyBought) {
-        for (int i = 0; i < boughtTickets.length; i++) {
-            if (selectedTicket.equals(boughtTickets[i].trim())) {
-                return true;
+    
+    public static String[] isLoginUserBoughtTicket(String[] boughtTickets, String selectedTicket) {
+        List<String> userTickets = new ArrayList<>();
+    
+        for (int i = 0; i < boughtTickets.length - 1; i++) {
+            if (boughtTickets[i].trim().isEmpty()) {
+                continue;
+            }    
+            String user =   boughtTickets[i].trim();
+            String ticketDetails = boughtTickets[i+1].trim();
+            if (user.equals(Main.loginname)) {
+                userTickets.add(ticketDetails);
             }
         }
+    
+        return userTickets.toArray(new String[0]);
     }
-    else{
-        return false;
-}
-return false;
-}
+    
+    
+    
+
 
 public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selectedTicket){
     for (int i = 0; i < boughtTickets.length; i++) {
@@ -92,7 +92,15 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         userTicketInfo.setBounds(0, 0, 800, 800); 
         userTicketInfo.setBackground(BgColor);
 
+        JPanel myTicketPanel = new JPanel();
+        myTicketPanel.setLayout(null);
+        myTicketPanel.setBounds(0, 0, 800, 800); 
+        myTicketPanel.setBackground(BgColor);
 
+        JScrollPane scrollPaneMy = new JScrollPane();
+        scrollPaneMy.setBounds(0,150,785,600);
+        scrollPaneMy.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPaneMy.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         JPanel MainSystem = new JPanel();
         MainSystem.setLayout(null);
@@ -191,10 +199,12 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
                 if(login.isEmpty() || "Write your login".equals(login)){
                     JOptionPane.showMessageDialog(mainframe, "Invalid login");
                 }else{
-                if ("a".equals(login) && "a".equals(password)) {
+                if ("admin".equals(login) && "admin".equals(password)) {
                         adminrules = true;
                         MainSystem.add(AddButton);
-                } else{
+                }
+                else{
+
                         loginname = login;
                 }
                     AuthorizationPanel.setVisible(false);

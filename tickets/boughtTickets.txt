@@ -1,26 +1,6 @@
-renat::1. Warsaw-Kielce, 18:30-20:10, Economy, S22, 14::
 renat::Wroclaw-Poznan, 2024-12-03(14:00) - 2024-12-16(15:50), Economy, E11, 12::
-=========================================
-From: Wroclaw
-To: Poznan
-Booking Date: 2024-12-03 14:00
-Arrival: 2024-12-16 15:50
-Seat: E11
-Type: Economy
-Total Cost: 12
-Bought By: renat
-=========================================
-
 test::Warsaw-Kielce, 2024-12-01(08:30) - 2024-12-13(18:10), Economy, S22, 14::
 test::Warsaw-Kielce, 2024-12-01(08:30) - 2024-12-13(18:10), Economy, S22, 14::
-test::Gdansk-Wroclaw, 2024-11-29(10:00) - 2024-12-14(13:45), Business, B12, 8::
-test::Warsaw-Poznan, 2024-11-28(08:30) - 2024-12-10(10:50), Economy, E12, 13::
-test::Wroclaw-Poznan, 2024-12-03(14:00) - 2024-12-16(15:50), Economy, E11, 12::
-test::Kielce-Poznan, 2024-11-20(02:30) - 2024-12-05(10:50), Economy, E2, 3::
-test::Gdansk-Warsaw, 2024-12-05(19:00) - 2024-12-13(21:20), Economy, S22, 18::
-aa::Krakow-Gdansk, 2024-12-02(06:00) - 2024-12-10(09:30), Economy, S12, 16::
-a::Krakow-Gdansk, 2024-12-02(06:00) - 2024-12-10(09:30), Economy, S12, 16::
 a::Wroclaw-Gdansk, 2023-12-13(09:30) - 2023-12-14(16:30), First Class, S5, 123::
-a::Poznan-Krakow, 2023-12-03(00:45) - 2023-12-06(22:15), Business, A4, 324::
-a::Lodz-Warsaw, 2024-12-02(12:00) - 2024-12-12(13:40), Business, B14, 8::
-a::Kielce-Lodz, 2024-11-28(09:30) - 2024-12-10(11:20), Economy, S22, 12::
+a::Warsaw-Poznan, 2024-12-01(00:00) - 2024-12-03(10:15), Economy, S1, 20::
+a::Warsaw-Poznan, 2023-12-01(00:45) - 2023-12-02(06:15), First Class, S5, 123::
