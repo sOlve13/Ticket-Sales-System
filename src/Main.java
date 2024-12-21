@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 
 
@@ -13,9 +11,10 @@ public class Main {
     static boolean adminrules = false;
     static Color BgColor = new Color(0, 36, 107);
     static String loginname = "";
-
+    static JPanel myTicketPanel;
+    static JScrollPane myScroll;
    
-    public static void goBackB(JPanel AuthorizationPanel, JPanel MainSystem, JPanel viewTickets, boolean AP, boolean  MS, boolean VT){
+    public static void goBackB(JPanel AuthorizationPanel, JPanel MainSystem, JPanel viewTickets, boolean AP, boolean  MS, boolean VT, boolean UT){
         if(AP == true){
             adminrules = false;
         }
@@ -29,6 +28,7 @@ public class Main {
         MainSystem.setVisible(MS);
         AuthorizationPanel.setVisible(AP);
         viewTickets.setVisible(VT);
+        myTicketPanel.setVisible(UT);
 
         MainSystem.repaint();
         AuthorizationPanel.repaint();
@@ -36,25 +36,7 @@ public class Main {
     }
 
 
-    
-    public static String[] isLoginUserBoughtTicket(String[] boughtTickets, String selectedTicket) {
-        List<String> userTickets = new ArrayList<>();
-    
-        for (int i = 0; i < boughtTickets.length - 1; i++) {
-            if (boughtTickets[i].trim().isEmpty()) {
-                continue;
-            }    
-            String user =   boughtTickets[i].trim();
-            String ticketDetails = boughtTickets[i+1].trim();
-            if (user.equals(Main.loginname)) {
-                userTickets.add(ticketDetails);
-            }
-        }
-    
-        return userTickets.toArray(new String[0]);
-    }
-    
-    
+
     
 
 
@@ -92,15 +74,15 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         userTicketInfo.setBounds(0, 0, 800, 800); 
         userTicketInfo.setBackground(BgColor);
 
-        JPanel myTicketPanel = new JPanel();
+        myTicketPanel = new JPanel();
         myTicketPanel.setLayout(null);
         myTicketPanel.setBounds(0, 0, 800, 800); 
         myTicketPanel.setBackground(BgColor);
 
-        JScrollPane scrollPaneMy = new JScrollPane();
-        scrollPaneMy.setBounds(0,150,785,600);
-        scrollPaneMy.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPaneMy.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane myScroll = new JScrollPane();
+        myScroll.setBounds(0,150,785,600);
+        myScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        myScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         JPanel MainSystem = new JPanel();
         MainSystem.setLayout(null);
@@ -131,7 +113,7 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
 
         ButtonBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                goBackB(AuthorizationPanel, MainSystem, viewTickets, true, false, false);
+                goBackB(AuthorizationPanel, MainSystem, viewTickets, true, false, false, false);
             }
         });
 
@@ -190,6 +172,7 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
                 AddTicket.addTicket(AddTicketPanel,viewTickets, scrollView, MainSystem, AuthorizationPanel,CenterX, BgColor);
             }
         }); 
+        
 
 
         startButton.addActionListener(new ActionListener() {
@@ -227,7 +210,7 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         viewButton.setBackground(new Color(202, 220, 252));
         viewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                ViewTicket.pressedView(viewTickets, scrollView, MainSystem, AuthorizationPanel, CenterX, BgColor);
+                ViewTicket.pressedView(viewTickets, scrollView, MainSystem, AuthorizationPanel, CenterX, BgColor, myTicketPanel, myScroll);
             }
         }); 
 
@@ -238,7 +221,9 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         AuthorizationPanel.add(startButton);
         MainSystem.add(ButtonBack);
         MainSystem.add(viewButton);
+        //MainSystem.add(myTickets);
         AddTicketPanel.setVisible(false);
+        myTicketPanel.setVisible(false);
         AuthorizationPanel.setVisible(true);
         MainSystem.setVisible(false);
         viewTickets.setVisible(false);
@@ -247,7 +232,9 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         mainframe.add(MainSystem);
         mainframe.add(viewTickets);
         mainframe.add(scrollView);
+        mainframe.add(myTicketPanel);
         mainframe.setVisible(true);
+        
         
 
 

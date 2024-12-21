@@ -88,7 +88,7 @@ public class AddTicket {
         goBackButton.setBackground(new Color(202, 220, 252));
         goBackButton.addActionListener(event -> {
             AddTicketPanel.setVisible(false);
-            Main.goBackB(AuthorizationPanel, MainSystem, viewTickets, false, true, false);
+            Main.goBackB(AuthorizationPanel, MainSystem, viewTickets, false, true, false, false);
         });
 
         saveButton.addActionListener(new ActionListener() {

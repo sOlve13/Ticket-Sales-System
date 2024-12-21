@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class ViewTicket {
 
-    public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPanel MainSystem, JPanel AuthorizationPanel, int CenterX, Color BgColor) {
+    public static void pressedView(JPanel viewTickets, JScrollPane scrollView, JPanel MainSystem, JPanel AuthorizationPanel, int CenterX, Color BgColor, JPanel myTicketPanel, JScrollPane myScroll) {
         viewTickets.removeAll();
         scrollView.repaint();
         scrollView.revalidate();
@@ -20,27 +20,55 @@ public class ViewTicket {
         JButton goBack = new JButton("Go Back");
         goBack.setBounds(100, 50, 150, 80);
         goBack.setBackground(new Color(202, 220, 252));
-        goBack.addActionListener(event -> Main.goBackB(AuthorizationPanel, MainSystem, viewTickets, false, true, false));
+        goBack.addActionListener(event -> Main.goBackB(AuthorizationPanel, MainSystem, viewTickets, false, true, false, false));
 
         updateFreeTickets();
         if (adminrules) {
-            JTextArea ticketsArea = new JTextArea(ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt"));
-            ticketsArea.setEditable(true);
-            ticketsArea.setForeground(Color.WHITE);
-            ticketsArea.setBackground(BgColor);
-            ticketsArea.setLineWrap(true);
-            ticketsArea.setWrapStyleWord(true);
-
-            JButton changeButton = new JButton("Save Changes");
-            changeButton.setBounds(400, 50, 150, 80);
-            changeButton.setBackground(new Color(202, 220, 252));
-            changeButton.addActionListener(event -> {
-                WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", ticketsArea.getText(), false);
-                JOptionPane.showMessageDialog(viewTickets, "Changes saved.");
+            String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
+        
+            DefaultListModel<String> model = new DefaultListModel<>();
+            for (String ticket : tickets) {
+                model.addElement(ticket);
+            }
+        
+            JList<String> ticketList = new JList<>(model);
+            ticketList.setBackground(BgColor);
+            ticketList.setForeground(Color.WHITE);
+            ticketList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+            scrollView.setViewportView(ticketList);
+            viewTickets.add(scrollView);
+        
+            JButton removeTButton = new JButton("Remove Ticket");
+            removeTButton.setBounds(400, 50, 200, 80);
+            removeTButton.setBackground(new Color(202, 220, 252));
+        
+            removeTButton.addActionListener(event -> {
+                String selectedTicket = ticketList.getSelectedValue();
+                if (selectedTicket == null) {
+                    JOptionPane.showMessageDialog(viewTickets, "Please select a ticket to remove.");
+                } else {
+                    model.removeElement(selectedTicket);
+        
+                    StringBuilder updatedTickets = new StringBuilder();
+                    for (int i = 0; i < model.getSize(); i++) {
+                        updatedTickets.append(model.getElementAt(i)).append("\n");
+                    }
+        
+                    WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt", updatedTickets.toString(), false);
+                    
+                    JOptionPane.showMessageDialog(viewTickets, "Ticket removed successfully.");
+                }
+        
+                viewTickets.repaint();
             });
-            viewTickets.add(changeButton);
-            scrollView.setViewportView(ticketsArea);
-        } else {
+        
+            viewTickets.add(removeTButton);
+            viewTickets.revalidate();
+            viewTickets.repaint();
+        } 
+        else {
+
             String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
             DefaultListModel<String> model = new DefaultListModel<>();
             for (String ticket : tickets) {
@@ -52,8 +80,16 @@ public class ViewTicket {
             ticketList.setForeground(Color.WHITE);
             ticketList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+            JButton myTickets = new JButton("My Tickets");
+            myTickets.setBounds(300, 50, 150, 80);
+            myTickets.setBackground(new Color(202, 220, 252));
+            myTickets.addActionListener(event -> {
+                UserBoughtTicket.myTicketPanelB(myTicketPanel, myScroll, MainSystem, AuthorizationPanel, viewTickets, CenterX, BgColor);
+            });
+            
+
             JButton buyTicket = new JButton("Buy Ticket");
-            buyTicket.setBounds(400, 50, 150, 80);
+            buyTicket.setBounds(500, 50, 150, 80);
             buyTicket.setBackground(new Color(202, 220, 252));
             buyTicket.addActionListener(event -> {
                 String selectedTicket = ticketList.getSelectedValue();
@@ -61,19 +97,6 @@ public class ViewTicket {
                     JOptionPane.showMessageDialog(viewTickets, "Select a ticket.");
                 } else {
                     String[] boughtTickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
-
-                    System.out.println("Logged-in user: " + Main.loginname);
-                    System.out.println("Matching tickets for the user:");
-
-                    String[] myTickets = Main.isLoginUserBoughtTicket(boughtTickets, selectedTicket);
-                    for (String ticket : myTickets) {
-                        System.out.println(ticket);
-                    }
-
-
-                    
-
-                    
                     
                     if (Main.isAlreadyBoughtTicket(boughtTickets, selectedTicket)) {
                         JOptionPane.showMessageDialog(viewTickets, "This ticket is already bought by someone else");
@@ -89,6 +112,7 @@ public class ViewTicket {
                 }
                 viewTickets.repaint();
             });
+            viewTickets.add(myTickets);
 
             viewTickets.add(buyTicket);
             scrollView.setViewportView(ticketList);
