@@ -184,16 +184,21 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
                 }else{
                 if ("admin".equals(login) && "admin".equals(password)) {
                         adminrules = true;
-                        MainSystem.add(AddButton);
                 }
                 else{
-
                         loginname = login;
+                        adminrules = false;
                 }
-                    AuthorizationPanel.setVisible(false);
-                    MainSystem.setVisible(true);
-                    loginField.setText("Write your login");
-                    passwordField.setText("Write your password");
+                if(adminrules == true){
+                    MainSystem.add(AddButton);
+                    AddButton.setVisible(true);
+                }else{
+                    AddButton.setVisible(false);
+                }
+                AuthorizationPanel.setVisible(false);
+                MainSystem.setVisible(true);
+                loginField.setText("Write your login");
+                passwordField.setText("Write your password");
                 
                 AuthorizationPanel.revalidate();
                 MainSystem.revalidate();
@@ -221,7 +226,6 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         AuthorizationPanel.add(startButton);
         MainSystem.add(ButtonBack);
         MainSystem.add(viewButton);
-        //MainSystem.add(myTickets);
         AddTicketPanel.setVisible(false);
         myTicketPanel.setVisible(false);
         AuthorizationPanel.setVisible(true);
