@@ -8,3 +8,5 @@ a::Kielce-Krakow, 2024-11-21(09:30) - 2024-12-05(10:50), Economy, S12, 13::
 a::Poznan-Krakow, 2023-12-03(00:45) - 2023-12-06(22:15), Business, A4, 324::
 a::Kielce-Lodz, 2024-11-28(09:30) - 2024-12-10(11:20), Economy, S22, 12::
 test::Warsaw-Bydgoszcz, 2023-12-12(00:30) - 2023-12-14(11:00), Economy, S3, 13::
+adm::Warsaw-Wroclaw, 2200-12-12(00:00) - 2200-12-13(01:00), Economy, S1, 12::
+adr::Warsaw-Krakow, 2023-12-12(00:00) - 2023-12-12(01:45), Economy, S1, 123::

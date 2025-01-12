@@ -34,7 +34,7 @@ public class Client {
     public String[] get_free_tickets(){
         try {
             String[] free_tickets = (String[]) this.input.readObject();
-            System.out.println(free_tickets[0]);
+            //System.out.println(free_tickets[0]);
             return free_tickets;
         } catch (Exception e) {
         }

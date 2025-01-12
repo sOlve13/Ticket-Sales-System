@@ -2,6 +2,11 @@ import java.io.*;
 import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
 
 public class Server {
     public static int bol = 0;
@@ -56,7 +61,54 @@ class ClientHandler extends Thread {
         }
     }
 
+    public static String[] isLoginUserBoughtTicket(String[] boughtTickets, String loginname) {
+        List<String> userTickets = new ArrayList<>();
+    
+        for (int i = 0; i < boughtTickets.length - 1; i++) {
+            if (boughtTickets[i].trim().isEmpty()) {
+                continue;
+            }    
+            String user =   boughtTickets[i].trim();
+            String ticketDetails = boughtTickets[i+1].trim();
+            if (user.equals(loginname)) {
+                userTickets.add(ticketDetails);
+            }
+        }
+    
+        return userTickets.toArray(new String[0]);
+    }
 
+    private static void updateFreeTickets() {
+        List<String> allTickets = new ArrayList<>(Arrays.asList(readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt").split("\n")));
+        List<String> boughtTickets = new ArrayList<>(Arrays.asList(readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::")));
+
+        List<String> boughtTicketRoutes = new ArrayList<>();
+        for (String ticket : boughtTickets) {
+            String cleanTicket = ticket.replaceAll("^[^:]+::", "").replaceAll("::$", "");
+
+            String[] ticketDetails = cleanTicket.split(",");
+            if (ticketDetails.length > 1) {
+                String routeDetails = ticketDetails[0] + "," + ticketDetails[1];
+                boughtTicketRoutes.add(routeDetails);
+            }
+        }
+        // Remove the bought tickets from the allTickets list based on the route information
+        for (String boughtRoute : boughtTicketRoutes) {
+            allTickets.removeIf(ticket -> ticket.contains(boughtRoute));  
+        }
+        String updatedFreeTickets = String.join("\n", allTickets);
+        writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt", updatedFreeTickets, false);
+    }
+
+    public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selectedTicket){
+        for (int i = 0; i < boughtTickets.length; i++) {
+            if (selectedTicket.equals(boughtTickets[i].trim())) {
+                return true;
+            }
+        }
+        return  false;
+    }
+    
     public void send_file(){}
     public void run() {
         try {
@@ -109,11 +161,22 @@ class ClientHandler extends Thread {
                         String[] tickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
                         oos.writeObject(tickets);
                         break;
-                    case "getmytickets":
-
-                        break;
                     case "buyticket":
-                        writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", switc[2], true);
+                        String record = switc[2] + "::" + switc[3] + "::" + "\n";
+                        writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
+                        break;
+                    case "getboughttickets":
+                        String[] boughtTickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
+                        String[] myTickets = isLoginUserBoughtTicket(boughtTickets, switc[2]);
+                        oos.writeObject(myTickets);
+                        break;
+                    case "update":
+                        updateFreeTickets();
+                        break;
+                    case "isalredaybought":
+                        String[] ticketsB = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
+                        boolean res = isAlreadyBoughtTicket(ticketsB, switc[2]);
+                        oos.writeObject(res);
                         break;
                         
 
@@ -130,6 +193,9 @@ class ClientHandler extends Thread {
                     case "getallfreeticket":
                         String[] tickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
                         oos.writeObject(tickets);
+                        break;
+                    case "update":
+                        updateFreeTickets();
                         break;
 
                 }

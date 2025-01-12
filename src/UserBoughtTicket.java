@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 
 public class UserBoughtTicket {
@@ -23,15 +21,17 @@ public class UserBoughtTicket {
         goBack.setBackground(new Color(202, 220, 252));
         goBack.addActionListener(event -> Main.goBackB(AuthorizationPanel, MainSystem, viewTickets, false, false, true, false));
     
-        String[] boughtTickets;
+        /*String[] boughtTickets;
         try {
-            boughtTickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
+            //boughtTickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
         } catch (Exception e) {
             boughtTickets = new String[0];
-        }
-    
-        String[] myTickets = isLoginUserBoughtTicket(boughtTickets, "");
-    
+        }*/
+        //String adm = "" + Main.adminrules;
+        Main.client.send_text(Main.adm + "::" + "getboughttickets" + "::" + Main.loginname);
+        String[] myTickets = Main.client.get_free_tickets();
+        //String[] myTickets = isLoginUserBoughtTicket(boughtTickets, "");
+        
         if (myTickets.length == 0) {
             JLabel noTicketsLabel = new JLabel("No tickets purchased yet.");
             noTicketsLabel.setBounds(CenterX, 200, 700, 30);
@@ -56,7 +56,7 @@ public class UserBoughtTicket {
         myTicket.repaint();
     }
 
-        public static String[] isLoginUserBoughtTicket(String[] boughtTickets, String selectedTicket) {
+       /*  public static String[] isLoginUserBoughtTicket(String[] boughtTickets) {
         List<String> userTickets = new ArrayList<>();
     
         for (int i = 0; i < boughtTickets.length - 1; i++) {
@@ -71,6 +71,6 @@ public class UserBoughtTicket {
         }
     
         return userTickets.toArray(new String[0]);
-    }
+    }*/
     
 }

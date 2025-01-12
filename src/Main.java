@@ -14,11 +14,13 @@ public class Main {
     static JPanel myTicketPanel;
     static JScrollPane myScroll;
     static Client client = new Client();
+    static String adm = "false";
 
    
     public static void goBackB(JPanel AuthorizationPanel, JPanel MainSystem, JPanel viewTickets, boolean AP, boolean  MS, boolean VT, boolean UT){
         if(AP == true){
             adminrules = false;
+            adm = "false";
         }
         MainSystem.repaint();
         AuthorizationPanel.repaint();
@@ -36,8 +38,7 @@ public class Main {
         AuthorizationPanel.repaint();
         viewTickets.repaint();
     }
-
-//remove cuz unnececery
+/*
 public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selectedTicket){
     for (int i = 0; i < boughtTickets.length; i++) {
         if (selectedTicket.equals(boughtTickets[i].trim())) {
@@ -45,7 +46,7 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         }
     }
     return  false;
-}
+}*/
 
     public static void main(String[] args) {  
         JFrame mainframe = new JFrame();
@@ -180,11 +181,12 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
                 String login = loginField.getText();
                 String password = passwordField.getText();
 
-                String adm = "" + adminrules;
+                //String adm = "" + adminrules;
                 client.send_text(adm + "::" + "login" + "::" + login + "::" + password);
                 //client.get_bool();
                 if(client.get_bool()){
                     adminrules = true;
+                    adm = "true";
                 }
                 //String[] test = client.get_free_tickets();
 
