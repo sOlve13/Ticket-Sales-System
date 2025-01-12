@@ -24,10 +24,14 @@ public class ViewTicket {
 
         updateFreeTickets();
         if (adminrules) {
-            String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
-        
+            String adm3 = "" + Main.adminrules;
+            Main.client.send_text(adm3 + "::" + "getallfreeticket" + "::");
+            String[] tickets2 = Main.client.get_free_tickets();
+
+            //String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
+ 
             DefaultListModel<String> model = new DefaultListModel<>();
-            for (String ticket : tickets) {
+            for (String ticket : tickets2) {
                 model.addElement(ticket);
             }
         
@@ -54,8 +58,10 @@ public class ViewTicket {
                     for (int i = 0; i < model.getSize(); i++) {
                         updatedTickets.append(model.getElementAt(i)).append("\n");
                     }
-        
-                    WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt", updatedTickets.toString(), false);
+                    String adm = "" + Main.adminrules;
+                    Main.client.send_text(adm + "::" + "removeticket" +"::" + updatedTickets.toString());
+                    //WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt", updatedTickets.toString(), false);
+                    updateFreeTickets();
                     
                     JOptionPane.showMessageDialog(viewTickets, "Ticket removed successfully.");
                 }
@@ -68,8 +74,10 @@ public class ViewTicket {
             viewTickets.repaint();
         } 
         else {
-
-            String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
+            String adm2 = "" + Main.adminrules;
+            Main.client.send_text(adm2 + "::" + "getallfreeticket" + "::");
+            String[] tickets = Main.client.get_free_tickets();
+            //String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
             DefaultListModel<String> model = new DefaultListModel<>();
             for (String ticket : tickets) {
                 model.addElement(ticket);
@@ -103,7 +111,9 @@ public class ViewTicket {
                     } else {
                         selectedTicket = selectedTicket.replace("\n", "").replace("\r", "");
                         String record = Main.loginname + "::" + selectedTicket + "::" + "\n";
-                        WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
+                        String adm1 = "" + Main.adminrules;
+                        Main.client.send_text(adm1 + "::" + "removeticket" +"::" + record);
+                        //WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
                         updateFreeTickets();
                         model.removeElement(selectedTicket);
 
@@ -116,6 +126,8 @@ public class ViewTicket {
 
             viewTickets.add(buyTicket);
             scrollView.setViewportView(ticketList);
+            viewTickets.revalidate();
+            viewTickets.repaint();
         }
         viewTickets.add(goBack);
         viewTickets.add(scrollView);

@@ -13,6 +13,8 @@ public class Main {
     static String loginname = "";
     static JPanel myTicketPanel;
     static JScrollPane myScroll;
+    static Client client = new Client();
+
    
     public static void goBackB(JPanel AuthorizationPanel, JPanel MainSystem, JPanel viewTickets, boolean AP, boolean  MS, boolean VT, boolean UT){
         if(AP == true){
@@ -35,11 +37,7 @@ public class Main {
         viewTickets.repaint();
     }
 
-
-
-    
-
-
+//remove cuz unnececery
 public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selectedTicket){
     for (int i = 0; i < boughtTickets.length; i++) {
         if (selectedTicket.equals(boughtTickets[i].trim())) {
@@ -49,9 +47,6 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
     return  false;
 }
 
- 
-
-    
     public static void main(String[] args) {  
         JFrame mainframe = new JFrame();
         mainframe.setSize(800,800);
@@ -63,6 +58,10 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
 
         ImageIcon img = new ImageIcon("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\bin\\icon.png");
         mainframe.setIconImage(img.getImage());
+
+        
+
+        
 
         JPanel AuthorizationPanel = new JPanel();
         AuthorizationPanel.setLayout(null);
@@ -173,17 +172,48 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
             }
         }); 
         
+        
 
-
+        
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 String login = loginField.getText();
                 String password = passwordField.getText();
+
+                String adm = "" + adminrules;
+                client.send_text(adm + "::" + "login" + "::" + login + "::" + password);
+                //client.get_bool();
+                if(client.get_bool()){
+                    adminrules = true;
+                }
+                //String[] test = client.get_free_tickets();
+
+                /*try {
+                
+                Socket cs = new Socket("localhost", 2555);
+                DataInputStream dis = new DataInputStream(cs.getInputStream());
+                DataOutputStream dos = new DataOutputStream(cs.getOutputStream());
+                //objectinputsream
+                String comb = login + "::" + password;
+                dos.writeUTF(comb);
+                dos.flush();
+                String input = (String)dis.readUTF();
+                System.out.println(input);
+                if("1".equals(input)){
+                    adminrules = true;
+                }
+                System.out.println("wrote");
+                cs.close();
+
+                } catch (Exception e) {
+                }*/
+                //
+
                 if(login.isEmpty() || "Write your login".equals(login)){
                     JOptionPane.showMessageDialog(mainframe, "Invalid login");
                 }else{
                 if ("admin".equals(login) && "admin".equals(password)) {
-                        adminrules = true;
+                        //adminrules = true;
                 }
                 else{
                         loginname = login;
@@ -219,6 +249,8 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
             }
         }); 
 
+
+        
         mainframe.add(userTicketInfo);
         mainframe.add(AddTicketPanel);
         AuthorizationPanel.add(loginField);
@@ -240,7 +272,6 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
         mainframe.setVisible(true);
         
         
-
 
         
     }  
