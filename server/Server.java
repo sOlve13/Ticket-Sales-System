@@ -30,6 +30,7 @@ public class Server {
 
 class ClientHandler extends Thread {
     private Socket socket;
+    private boolean adminrules;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
@@ -162,6 +163,7 @@ class ClientHandler extends Thread {
                         oos.writeObject(tickets);
                         break;
                     case "buyticket":
+                        switc[3] = switc[3].replace("\n", "").replace("\r", "");
                         String record = switc[2] + "::" + switc[3] + "::" + "\n";
                         writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
                         break;
