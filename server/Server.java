@@ -31,6 +31,7 @@ public class Server {
 class ClientHandler extends Thread {
     private Socket socket;
     private boolean adminrules;
+    private String login;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
@@ -109,6 +110,14 @@ class ClientHandler extends Thread {
         }
         return  false;
     }
+    public static boolean isAvailable(String[] freeTickes, String selectedTicket){
+        for (int i = 0; i < freeTickes.length; i++) {
+            if (selectedTicket.equals(freeTickes[i].trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     public void send_file(){}
     public void run() {
@@ -148,28 +157,50 @@ class ClientHandler extends Thread {
             while (true) { 
                 String inp = (String) ois.readObject();
                 String[] switc = inp.split("::");
-                System.out.println(switc[0] + switc[1]);
-                if(switc[0].equals("false")){
-                switch (switc[1]) {
-                    case "login":
+                System.out.println(switc[0]);
+                if("login".equals(switc[0])){
+                    login = switc[1];
+                if (switc[1].equals("admin") && switc[2].equals("admin")) {
+                    oos.writeObject(true);
+                    adminrules = true;
+                } else {
+                    oos.writeObject(false);
+                    adminrules = false;
+                }
+                System.out.println("adminrules after if : " + adminrules);}
+                System.out.println("Current server adminrules : " + adminrules + "\nCurrent login name : " + login);
+                if(adminrules == false){
+                switch (switc[0]) {
+                    /*case "login":
                         if (switc[2].equals("admin") && switc[3].equals("admin")) {
                             oos.writeObject(true);
+                            adminrules = true;
                         } else {
                             oos.writeObject(false);
+                            adminrules = false;
                         }
-                        break;
+                        break;*/
                     case "getallfreeticket":
                         String[] tickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
                         oos.writeObject(tickets);
                         break;
                     case "buyticket":
-                        switc[3] = switc[3].replace("\n", "").replace("\r", "");
-                        String record = switc[2] + "::" + switc[3] + "::" + "\n";
-                        writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
+                        String[] freetickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
+                        switc[2] = switc[2].replace("\n", "").replace("\r", "");
+                        if(isAvailable(freetickets, switc[2])){
+                            oos.writeObject(true);
+                            String record = switc[1] + "::" + switc[2] + "::" + "\n";
+                            writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
+                        }
+                        else{
+                            oos.writeObject(false);
+                        }
+                        //String record = switc[2] + "::" + switc[3] + "::" + "\n";
+                        //writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
                         break;
                     case "getboughttickets":
                         String[] boughtTickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
-                        String[] myTickets = isLoginUserBoughtTicket(boughtTickets, switc[2]);
+                        String[] myTickets = isLoginUserBoughtTicket(boughtTickets, switc[1]);
                         oos.writeObject(myTickets);
                         break;
                     case "update":
@@ -177,20 +208,27 @@ class ClientHandler extends Thread {
                         break;
                     case "isalredaybought":
                         String[] ticketsB = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt").split("::");
-                        boolean res = isAlreadyBoughtTicket(ticketsB, switc[2]);
+                        boolean res = isAlreadyBoughtTicket(ticketsB, switc[1]);
                         oos.writeObject(res);
                         break;
                         
 
                 }}
-                else if(switc[0].equals("true")){
-                switch (switc[1]) {
+                else if(adminrules == true){
+                switch (switc[0]) {
 
                     case "addticket":
-                        writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", switc[2], true);
+                        writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", switc[1], true);
                         break;
                     case "removeticket":
-                        writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", switc[2], false);
+                        String[] allTickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
+                        if(isAvailable(allTickets, switc[1])){
+                            writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", switc[1], false);
+                            oos.writeObject(true);
+                        }else{
+                            oos.writeObject(false);
+                        }
+                        //writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", switc[1], false);
                         break;
                     case "getallfreeticket":
                         String[] tickets = readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");

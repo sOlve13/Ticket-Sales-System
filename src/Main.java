@@ -1,4 +1,4 @@
-import java.awt.Color;
+    import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,10 +18,10 @@ public class Main {
 
    
     public static void goBackB(JPanel AuthorizationPanel, JPanel MainSystem, JPanel viewTickets, boolean AP, boolean  MS, boolean VT, boolean UT){
-        if(AP == true){
-            adminrules = false;
-            adm = "false";
-        }
+        //if(AP == true){
+            //adminrules = false;
+            //adm = "false";
+        //}
         MainSystem.repaint();
         AuthorizationPanel.repaint();
         viewTickets.repaint();
@@ -182,11 +182,16 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
                 String password = passwordField.getText();
 
                 //String adm = "" + adminrules;
-                client.send_text(adm + "::" + "login" + "::" + login + "::" + password);
+                client.send_text("login" + "::" + login + "::" + password);
+                adminrules = client.get_bool();
                 //client.get_bool();
-                if(client.get_bool()){
-                    adminrules = true;
-                    adm = "true";
+                //if(client.get_bool()){
+                    //adminrules = true;
+                    //adm = "true";
+                //}
+                if(Client.isConnected == false){
+                    JOptionPane.showMessageDialog(mainframe, "Could not connect to the server");
+                    System.exit(0);
                 }
                 //String[] test = client.get_free_tickets();
 

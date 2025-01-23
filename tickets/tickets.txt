@@ -37,11 +37,4 @@ Kielce-Poznan, 2024-11-30(14:00) - 2024-12-12(16:30), Business, B14, 7
 Poznan-Lublin, 2024-12-02(17:00) - 2024-12-10(18:40), Economy, S13, 13
 Lublin-Gdansk, 2024-12-03(19:30) - 2024-12-15(22:10), Economy, S22, 16
 Gdansk-Warsaw, 2024-11-30(23:00) - 2024-12-10(01:30), Economy, S12, 12
-Warsaw-Wroclaw, 2024-12-02(07:00) - 2024-12-13(09:30), Business, B13, 10
-Wroclaw-Krakow, 2024-11-28(10:00) - 2024-12-12(12:20), Economy, S14, 14
-Krakow-Gdansk, 2024-12-01(13:00) - 2024-12-11(16:30), Economy, S22, 18
-Gdansk-Warsaw, 2024-11-23(17:10) - 2024-12-12(19:50), Business, B12, 9
-Warsaw-Poznan, 2024-11-26(20:30) - 2024-12-09(22:10), Economy, S13, 11
-Poznan-Kielce, 2024-12-05(06:00) - 2024-12-13(08:40), Economy, E12, 13
-Lodz-Warsaw, 2024-12-02(12:00) - 2024-12-12(13:40), Business, B14, 8
-Warsaw-Krakow, 2023-12-12(00:00) - 2023-12-12(01:45), Economy, S1, 123
+Warsaw-Katowice, 2025-04-12(13:45) - 2025-04-13(18:30), First Class, S7, 200

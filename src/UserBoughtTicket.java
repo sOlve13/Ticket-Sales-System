@@ -28,7 +28,7 @@ public class UserBoughtTicket {
             boughtTickets = new String[0];
         }*/
         //String adm = "" + Main.adminrules;
-        Main.client.send_text(Main.adm + "::" + "getboughttickets" + "::" + Main.loginname);
+        Main.client.send_text("getboughttickets" + "::" + Main.loginname);
         String[] myTickets = Main.client.get_free_tickets();
         //String[] myTickets = isLoginUserBoughtTicket(boughtTickets, "");
         

@@ -5,13 +5,16 @@ import java.net.Socket;
 public class Client {
     private ObjectOutputStream output;
     private ObjectInputStream input;
+    public static boolean isConnected;
 
     public Client() {
         try {
             Socket cs = new Socket("localhost", 3555);
             this.output = new ObjectOutputStream(cs.getOutputStream());
             this.input = new ObjectInputStream(cs.getInputStream());
+            isConnected = true;
         } catch (Exception e) {
+            isConnected = false;
         }
     }
 

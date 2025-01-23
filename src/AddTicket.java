@@ -141,7 +141,7 @@ public class AddTicket {
                 String ticketData = from + "-" + to + ", " + dateStart + "(" + timeStart + ") - " + dateFinish + "(" + timeFinish + "), " + priceClass + ", " + seat + ", " + price + "\n";
                 
                 //String adm = "" + Main.adminrules;
-                Main.client.send_text(Main.adm + "::" + "addticket" +"::" + ticketData);
+                Main.client.send_text("addticket" +"::" + ticketData);
                 //WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", ticketData, true);
                 JOptionPane.showMessageDialog(AddTicketPanel, "Ticket saved successfully!");
 
