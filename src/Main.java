@@ -182,10 +182,10 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
                 String password = passwordField.getText();
 
                 //String adm = "" + adminrules;
-                client.send_text("login" + "::" + login + "::" + password);
-                adminrules = client.get_bool();
-                //client.get_bool();
-                //if(client.get_bool()){
+                client.sendTextToServer("login" + "::" + login + "::" + password);
+                adminrules = client.getBoolean();
+                //client.getBoolean();
+                //if(client.getBoolean()){
                     //adminrules = true;
                     //adm = "true";
                 //}
@@ -193,7 +193,7 @@ public static boolean isAlreadyBoughtTicket(String[] boughtTickets, String selec
                     JOptionPane.showMessageDialog(mainframe, "Could not connect to the server");
                     System.exit(0);
                 }
-                //String[] test = client.get_free_tickets();
+                //String[] test = client.getTicketsString();
 
                 /*try {
                 

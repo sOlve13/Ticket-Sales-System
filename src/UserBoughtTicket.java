@@ -28,8 +28,8 @@ public class UserBoughtTicket {
             boughtTickets = new String[0];
         }*/
         //String adm = "" + Main.adminrules;
-        Main.client.send_text("getboughttickets" + "::" + Main.loginname);
-        String[] myTickets = Main.client.get_free_tickets();
+        Main.client.sendTextToServer("getboughttickets" + "::" + Main.loginname);
+        String[] myTickets = Main.client.getTicketsString();
         //String[] myTickets = isLoginUserBoughtTicket(boughtTickets, "");
         
         if (myTickets.length == 0) {

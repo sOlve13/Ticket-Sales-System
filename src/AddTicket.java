@@ -141,9 +141,13 @@ public class AddTicket {
                 String ticketData = from + "-" + to + ", " + dateStart + "(" + timeStart + ") - " + dateFinish + "(" + timeFinish + "), " + priceClass + ", " + seat + ", " + price + "\n";
                 
                 //String adm = "" + Main.adminrules;
-                Main.client.send_text("addticket" +"::" + ticketData);
+                Main.client.sendTextToServer("addticket" + "::" + ticketData);
                 //WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\tickets.txt", ticketData, true);
-                JOptionPane.showMessageDialog(AddTicketPanel, "Ticket saved successfully!");
+                if(Main.client.getBoolean()){
+                    JOptionPane.showMessageDialog(AddTicketPanel, "Ticket saved successfully!");
+                }else{
+                    JOptionPane.showMessageDialog(AddTicketPanel, "Ticket already exists!");
+                }
 
             }
         });

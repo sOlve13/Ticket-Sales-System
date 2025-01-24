@@ -20,11 +20,11 @@ public class ViewTicket {
         goBack.addActionListener(event -> Main.goBackB(AuthorizationPanel, MainSystem, viewTickets, false, true, false, false));
 
         //updateFreeTickets();
-        Main.client.send_text("update" + "::");
+        Main.client.sendTextToServer("update" + "::");
         if (Main.adminrules) {
             //String adm3 = "" + Main.adminrules;
-            Main.client.send_text("getallfreeticket" + "::");
-            String[] tickets2 = Main.client.get_free_tickets();
+            Main.client.sendTextToServer("getallfreeticket" + "::");
+            String[] tickets2 = Main.client.getTicketsString();
 
             //String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
  
@@ -56,13 +56,16 @@ public class ViewTicket {
                     for (int i = 0; i < model.getSize(); i++) {
                         updatedTickets.append(model.getElementAt(i)).append("\n");
                     }
-                    //String adm = "" + Main.adminrules;
-                    Main.client.send_text("removeticket" +"::" + updatedTickets.toString());
+                    Main.client.sendTextToServer("removeticket" +"::" + updatedTickets.toString());
+                    if(Main.client.getBoolean()){
+                        JOptionPane.showMessageDialog(viewTickets, "Ticket removed successfully.");
+                    }else{
+                        JOptionPane.showMessageDialog(viewTickets, "Couldn't remove the ticket.");
+                    }
                     //WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt", updatedTickets.toString(), false);
                     //updateFreeTickets();
-                    Main.client.send_text("update" + "::");
+                    Main.client.sendTextToServer("update" + "::");
                     
-                    JOptionPane.showMessageDialog(viewTickets, "Ticket removed successfully.");
                 }
         
                 viewTickets.repaint();
@@ -74,8 +77,8 @@ public class ViewTicket {
         } 
         else {
             //String adm2 = "" + Main.adminrules;
-            Main.client.send_text("getallfreeticket" + "::");
-            String[] tickets = Main.client.get_free_tickets();
+            Main.client.sendTextToServer("getallfreeticket" + "::");
+            String[] tickets = Main.client.getTicketsString();
             //String[] tickets = ReadFile.readFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\freeTickets.txt").split("\n");
             DefaultListModel<String> model = new DefaultListModel<>();
             for (String ticket : tickets) {
@@ -112,22 +115,22 @@ public class ViewTicket {
                         selectedTicket = selectedTicket.replace("\n", "").replace("\r", "");
                         String record = Main.loginname + "::" + selectedTicket + "::" + "\n";
                         //String adm1 = "" + Main.adminrules;
-                        Main.client.send_text(Main.adm + "::" + "buyticket" +"::" + record);
+                        Main.client.sendTextToServer(Main.adm + "::" + "buyticket" +"::" + record);
                         //WriteFile.writeFile("C:\\Users\\Rinat\\Documents\\University\\YEAR 2\\OOP 2 Project\\Game\\Game\\tickets\\boughtTickets.txt", record, true);
                         //updateFreeTickets();
-                        Main.client.send_text(Main.adm + "::" + "update" + "::");
+                        Main.client.sendTextToServer(Main.adm + "::" + "update" + "::");
                         model.removeElement(selectedTicket);
 
                         JOptionPane.showMessageDialog(viewTickets, "Congrats, ticket bought!");
                     }*/
 
-                    Main.client.send_text("isalredaybought" + "::" + selectedTicket);
-                    if(Main.client.get_bool()){
+                    Main.client.sendTextToServer("isalreadybought" + "::" + selectedTicket);
+                    if(Main.client.getBoolean()){
                         JOptionPane.showMessageDialog(viewTickets, "This ticket is already bought by someone else");
                     }else{
-                        Main.client.send_text("buyticket" + "::" + Main.loginname + "::" + selectedTicket);
-                        if(Main.client.get_bool()){
-                            Main.client.send_text("update" + "::");
+                        Main.client.sendTextToServer("buyticket" + "::" + Main.loginname + "::" + selectedTicket);
+                        if(Main.client.getBoolean()){
+                            Main.client.sendTextToServer("update" + "::");
                         model.removeElement(selectedTicket);
                         JOptionPane.showMessageDialog(viewTickets, "Congrats, ticket bought!");
                         }

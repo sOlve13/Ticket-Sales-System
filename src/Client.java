@@ -25,7 +25,7 @@ public class Client {
 
 
 
-    public void send_text(String text) {
+    public void sendTextToServer(String text) {
         try {
             this.output.writeObject(text);
             this.output.flush();
@@ -34,11 +34,11 @@ public class Client {
     }
 
 
-    public String[] get_free_tickets(){
+    public String[] getTicketsString(){
         try {
-            String[] free_tickets = (String[]) this.input.readObject();
-            //System.out.println(free_tickets[0]);
-            return free_tickets;
+            String[] tickets = (String[]) this.input.readObject();
+            //System.out.println(tickets[0]);
+            return tickets;
         } catch (Exception e) {
         }
         return null;
@@ -48,7 +48,7 @@ public class Client {
 
 
 
-    public boolean  get_bool(){
+    public boolean  getBoolean(){
         try {
             Boolean input = (boolean) this.input.readObject();
             return input;
