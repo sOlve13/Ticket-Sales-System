@@ -35,3 +35,5 @@ Wroclaw-Warsaw, 2024-12-04(09:00) - 2024-12-09(11:20), Economy, S22, 14
 Warsaw-Kielce, 2024-11-28(12:00) - 2024-12-06(13:50), Economy, E12, 11
 Kielce-Poznan, 2024-11-30(14:00) - 2024-12-12(16:30), Business, B14, 7
 Poznan-Lublin, 2024-12-02(17:00) - 2024-12-10(18:40), Economy, S13, 13
+Warsaw-Szczecin, 2000-12-12(00:45) - 2000-12-23(17:00), Economy, S1, 100
+Warsaw-Wroclaw, 2000-12-13(00:00) - 2000-12-29(12:30), Economy, S1, 100

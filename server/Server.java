@@ -94,7 +94,6 @@ class ClientHandler extends Thread {
                 boughtTicketRoutes.add(routeDetails);
             }
         }
-        // Remove the bought tickets from the allTickets list based on the route information
         for (String boughtRoute : boughtTicketRoutes) {
             allTickets.removeIf(ticket -> ticket.contains(boughtRoute));  
         }
