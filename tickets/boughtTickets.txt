@@ -25,3 +25,4 @@ a::Warsaw-Wroclaw, 2002-12-12(00:00) - 2002-12-12(07:00), Economy, S1, 12::
 test::Warsaw-Katowice, 2025-04-12(13:45) - 2025-04-13(18:30), First Class, S7, 200::
 test::Gdansk-Warsaw, 2024-11-30(23:00) - 2024-12-10(01:30), Economy, S12, 12::
 ad::Lublin-Gdansk, 2024-12-03(19:30) - 2024-12-15(22:10), Economy, S22, 16::
+test::Warsaw-Szczecin, 2000-12-12(00:45) - 2000-12-23(17:00), Economy, S1, 100::
